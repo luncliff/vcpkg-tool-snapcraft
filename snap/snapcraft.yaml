@@ -1,0 +1,40 @@
+name: luncliff-vcpkg-tool
+summary: "Experiment for deploying vcpkg executable to https://snapcraft.io/"
+description: |
+  Using a fork of https://github.com/microsoft/vcpkg-tool
+  Check https://github.com/luncliff/vcpkg-tool-snapcraft together
+
+base: core22
+grade: devel
+version: "test"
+confinement: strict
+
+parts:
+  vcpkg:
+    plugin: cmake
+    source: https://github.com/luncliff/vcpkg-tool.git
+    # source: https://github.com/microsoft/vcpkg-tool.git
+    # source-tag: "2024-04-23"
+    # source-type: git
+    # source-depth: 1
+    cmake-generator: Ninja
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_C_COMPILER=clang-15
+      - -DCMAKE_CXX_COMPILER=clang++-15
+      - -DBUILD_TESTING=OFF
+      - -DVCPKG_DEVELOPMENT_WARNINGS=OFF
+      - -DVCPKG_EMBED_GIT_SHA=ON
+    build-packages:
+      - git
+      - clang-15
+      - libc++-15-dev
+    stage-packages:
+      - curl
+      - zip
+      - unzip
+      - tar
+
+apps:
+  vcpkg:
+    command: /usr/bin/vcpkg
