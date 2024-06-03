@@ -13,33 +13,40 @@ parts:
   vcpkg:
     plugin: cmake
     source: https://github.com/luncliff/vcpkg-tool.git
+    source-branch: develop
     # source: https://github.com/microsoft/vcpkg-tool.git
     # source-tag: "2024-04-23"
-    # source-type: git
-    # source-depth: 1
+    source-type: git
+    source-depth: 1
     cmake-generator: Ninja
     cmake-parameters:
-      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_INSTALL_PREFIX=/usr/local
       - -DCMAKE_C_COMPILER=clang-15
       - -DCMAKE_CXX_COMPILER=clang++-15
       - -DBUILD_TESTING=OFF
       - -DVCPKG_DEVELOPMENT_WARNINGS=OFF
       - -DVCPKG_EMBED_GIT_SHA=ON
+      - -DVCPKG_DEPENDENCY_EXTERNAL_FMT=OFF
+      - -DFMT_INSTALL=OFF
     build-packages:
       - git
       - clang-15
       - libc++-15-dev
     stage-packages:
+      - git
       - curl
       - zip
       - unzip
       - tar
-  notices:
+  upstream-registry:
     plugin: dump
-    source: share
+    source: https://github.com/microsoft/vcpkg/archive/refs/tags/2024.04.26.zip
+    source-type: zip
     organize:
-      'vcpkg-tool/*.txt': /usr/share/vcpkg-tool/
+      'vcpkg-2024.04.26' : usr/local/share/vcpkg
 
 apps:
   vcpkg:
-    command: /usr/bin/vcpkg
+    command: /usr/local/bin/vcpkg
+    environment:
+      VCPKG_ROOT: $SNAP/usr/local/share/vcpkg
