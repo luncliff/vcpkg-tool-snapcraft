@@ -21,8 +21,8 @@ parts:
     cmake-generator: Ninja
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr/local
-      - -DCMAKE_C_COMPILER=clang-15
-      - -DCMAKE_CXX_COMPILER=clang++-15
+      # - -DCMAKE_C_COMPILER=clang-15
+      # - -DCMAKE_CXX_COMPILER=clang++-15
       - -DBUILD_TESTING=OFF
       - -DVCPKG_DEVELOPMENT_WARNINGS=OFF
       - -DVCPKG_EMBED_GIT_SHA=ON
@@ -30,10 +30,12 @@ parts:
       - -DFMT_INSTALL=OFF
     build-packages:
       - git
-      - clang-15
-      - libc++-15-dev
+      # - clang-15
+      # - libc++-15-dev
     stage-packages:
       - git
+      - gcc
+      - g++
       - curl
       - zip
       - unzip
@@ -52,3 +54,5 @@ apps:
       VCPKG_ROOT: $SNAP/usr/local/share/vcpkg
       VCPKG_DOWNLOADS: /tmp/vcpkg-downloads
       VCPKG_DEFAULT_BINARY_CACHE: $SNAP_USER_DATA
+      CC: gcc
+      CXX: g++
