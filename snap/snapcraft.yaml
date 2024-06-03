@@ -47,6 +47,8 @@ parts:
 
 apps:
   vcpkg:
-    command: /usr/local/bin/vcpkg
+    command: /usr/local/bin/vcpkg --x-buildtrees-root $SNAP_USER_DATA/buildtrees --x-packages-root $SNAP_USER_DATA/packages
     environment:
       VCPKG_ROOT: $SNAP/usr/local/share/vcpkg
+      VCPKG_DOWNLOADS: /tmp/vcpkg-downloads
+      VCPKG_DEFAULT_BINARY_CACHE: $SNAP_USER_DATA
