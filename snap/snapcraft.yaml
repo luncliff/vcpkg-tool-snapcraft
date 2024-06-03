@@ -34,6 +34,8 @@ parts:
       - libc++-15-dev
     stage-packages:
       - git
+      - clang-15
+      - libc++-15-dev
       - curl
       - zip
       - unzip
@@ -52,3 +54,5 @@ apps:
       VCPKG_ROOT: $SNAP/usr/local/share/vcpkg
       VCPKG_DOWNLOADS: /tmp/vcpkg-downloads
       VCPKG_DEFAULT_BINARY_CACHE: $SNAP_USER_DATA
+      CC: clang-15
+      CXX: clang++-15
