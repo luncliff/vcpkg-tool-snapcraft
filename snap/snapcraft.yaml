@@ -12,10 +12,8 @@ confinement: strict
 parts:
   vcpkg:
     plugin: cmake
-    source: https://github.com/luncliff/vcpkg-tool.git
-    source-branch: develop
-    # source: https://github.com/microsoft/vcpkg-tool.git
-    # source-tag: "2024-04-23"
+    source: https://github.com/microsoft/vcpkg-tool.git
+    source-tag: "2024-04-23"
     source-type: git
     source-depth: 1
     cmake-generator: Ninja
