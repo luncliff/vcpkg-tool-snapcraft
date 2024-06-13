@@ -13,7 +13,7 @@ parts:
   vcpkg:
     plugin: cmake
     source: https://github.com/luncliff/vcpkg-tool.git
-    source-branch: develop
+    source-branch: develop # 4697044ee78033dcb38c68b536b0c96a07e887c1, 41ea97d040245007c2978d05955376edae521adb
     # source: https://github.com/microsoft/vcpkg-tool.git
     # source-tag: "2024-04-23"
     source-type: git
