@@ -22,8 +22,17 @@ jobs:
         shell: bash
 
       - name: "Run apps"
+        id: app-run
         run: |
-          luncliff-vcpkg-tool.vcpkg-clang --help
-          luncliff-vcpkg-tool.vcpkg-clang search zlib
-          # luncliff-vcpkg-tool.vcpkg-clang install zlib-ng
+          luncliff-vcpkg-tool.vcpkg --help
+          luncliff-vcpkg-tool.vcpkg search zlib
+          # luncliff-vcpkg-tool.vcpkg install zlib-ng --debug
         shell: bash
+
+      - uses: actions/upload-artifact@v4
+        if: steps.app-run.outcome == 'failure'
+        with:
+          name: app-run
+          path: |
+            ${{ env.HOME }}/snap/luncliff-vcpkg-tool/**/*.log
+            ${{ env.HOME }}/snap/luncliff-vcpkg-tool/**/*.txt
