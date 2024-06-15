@@ -21,16 +21,21 @@ jobs:
           sudo snap install --dangerous ${{ steps.snapcraft-build.outputs.snap }}
         shell: bash
 
-      - name: "Run apps"
+      - name: "Run apps(vcpkg)"
         id: app-run
         run: |
           luncliff-vcpkg-tool.vcpkg --help
           luncliff-vcpkg-tool.vcpkg search zlib
-          # luncliff-vcpkg-tool.vcpkg install zlib-ng --debug
+        shell: bash
+
+      - name: "Run apps(vcpkg install)"
+        id: app-run-install
+        run: |
+          luncliff-vcpkg-tool.vcpkg install zlib-ng --debug
         shell: bash
 
       - uses: actions/upload-artifact@v4
-        if: steps.app-run.outcome == 'failure'
+        if: ${{ steps.app-run.outcome == 'failure' || steps.app-run-install.outcome == 'failure' }}
         with:
           name: app-run
           path: |
