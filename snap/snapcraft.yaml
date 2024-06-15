@@ -34,8 +34,6 @@ parts:
       - libc++-15-dev
     stage-packages:
       - git
-      - clang-15
-      - libc++-15-dev
       - curl
       - zip
       - unzip
@@ -45,14 +43,12 @@ parts:
     source: https://github.com/microsoft/vcpkg/archive/refs/tags/2024.04.26.zip
     source-type: zip
     organize:
-      'vcpkg-2024.04.26' : usr/local/share/vcpkg
+      'vcpkg-2024.04.26' : usr/share/vcpkg
 
 apps:
   vcpkg:
-    command: /usr/local/bin/vcpkg --x-buildtrees-root $SNAP_USER_DATA/buildtrees --x-packages-root $SNAP_USER_DATA/packages
+    command: /usr/local/bin/vcpkg --x-buildtrees-root $SNAP_USER_DATA/buildtrees --x-packages-root $SNAP_USER_DATA/packages --x-install-root $SNAP_USER_DATA/installed
     environment:
-      VCPKG_ROOT: $SNAP/usr/local/share/vcpkg
-      VCPKG_DOWNLOADS: /tmp/vcpkg-downloads
+      VCPKG_ROOT: $SNAP/usr/share/vcpkg
+      VCPKG_DOWNLOADS: $SNAP_USER_DATA
       VCPKG_DEFAULT_BINARY_CACHE: $SNAP_USER_DATA
-      CC: clang-15
-      CXX: clang++-15

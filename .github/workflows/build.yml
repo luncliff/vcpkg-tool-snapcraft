@@ -20,3 +20,10 @@ jobs:
         run: |
           sudo snap install --dangerous ${{ steps.snapcraft-build.outputs.snap }}
         shell: bash
+
+      - name: "Run apps"
+        run: |
+          luncliff-vcpkg-tool.vcpkg-clang --help
+          luncliff-vcpkg-tool.vcpkg-clang search zlib
+          # luncliff-vcpkg-tool.vcpkg-clang install zlib-ng
+        shell: bash
